@@ -51,12 +51,23 @@ footer {
     align-items: center;
 }
 
+.main-section {
+    font-size: 18px;
+    color: #555;
+    margin-top: 20px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    margin-bottom: 75px;
+}
+
 .cards-container {
     margin-top: 20px;
-    display: flex;
+    display:flex;
     gap: 20px;
     justify-content: center;
-    max-width: 1200x;
+    width: 100%;
 }
 
 .upper-section {
@@ -78,7 +89,7 @@ footer {
 }
 
 .upper-selected {
-    background: #f0e7ff;
+    background: #e7d8ff;
     color: #af80ff;
     width: 150px;
     padding: 15px;
@@ -87,7 +98,6 @@ footer {
     transition: 0.3s;
     pointer-events: none;
     cursor: default;
-    font-weight: bold;
 }
 
 .card {
@@ -105,7 +115,7 @@ footer {
     margin-top: 200px;
     height: auto;
     background: linear-gradient(180deg,#7b2cff, #c833d6);
-    width: 90%;
+    width: 1100px;
     padding: 40px;
     border-radius: 20px;
     text-decoration: none;
@@ -168,7 +178,20 @@ footer {
 }
 
 .gradient-text {
-    background: linear-gradient(90deg, #ff2cc0, #00c6ff);
+    background: radial-gradient(circle, #ff2cc0, #00c6ff);
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 900;
+    font-size-adjust: none;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+}
+
+.home-star{
+    width: 100px;
+    transition: filter 0.5s ease;
+    margin-bottom: auto;
+}
+
+.home-star:hover {
+    filter: brightness(1.5);
 }
