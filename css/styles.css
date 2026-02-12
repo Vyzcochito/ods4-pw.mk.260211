@@ -29,11 +29,17 @@ footer {
     background-color: #ffffff;
     padding: 15px;
     text-align: center;
-    z-index: 1000;
+    z-index: 100;
 }
 
 .white-text {
     color: white;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  gap: 60%;
 }
 
 .home {
@@ -51,6 +57,25 @@ footer {
     gap: 20px;
     justify-content: center;
     max-width: 1200x;
+}
+
+.upper-section {
+    margin-top: 15px;
+    display:flex;
+    gap: 30px;
+    justify-content: center;
+    max-width: 120px;
+}
+
+.upper-card {
+    background: #ffffff;
+    width: 150px;
+    padding: 15px;
+    border-radius: 15px;
+    text-decoration: none;
+    color: #737373;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: 0.3s;
 }
 
 .card {
@@ -82,8 +107,14 @@ footer {
     transform: translateY(-5px);
     box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
+
 .card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.upper-card:hover {
+    transform: translateY(-3px);
     box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
 
