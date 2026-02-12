@@ -71,11 +71,23 @@ footer {
     background: #ffffff;
     width: 150px;
     padding: 15px;
-    border-radius: 15px;
+    border-radius: 30px;
     text-decoration: none;
     color: #737373;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     transition: 0.3s;
+}
+
+.upper-selected {
+    background: #f0e7ff;
+    color: #af80ff;
+    width: 150px;
+    padding: 15px;
+    border-radius: 30px;
+    text-decoration: none;
+    transition: 0.3s;
+    pointer-events: none;
+    cursor: default;
+    font-weight: bold;
 }
 
 .card {
@@ -114,10 +126,9 @@ footer {
 }
 
 .upper-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    background-color: #f8f1ff;
+    color:#af80ff
 }
-
 .icon {
     width: 60px;
     height: 60px;
