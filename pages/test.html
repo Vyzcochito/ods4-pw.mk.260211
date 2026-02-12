@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test de Bienestar Emocional</title>
+  <link rel="stylesheet" href="../css/style.css">
+
+  <style>
+    /* === Estilos del test === */
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f2f6ff;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      text-align: center;
+      padding: 2rem 1rem;
+      background: linear-gradient(135deg, #8e2de2, #4a00e0);
+      color: white;
+      border-radius: 0 0 30px 30px;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    header p {
+      font-size: 1rem;
+      opacity: 0.9;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 2rem auto;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      padding: 2rem;
+    }
+
+    h2 {
+      color: #4a00e0;
+      margin-bottom: 0.5rem;
+    }
+
+    section {
+      margin-bottom: 2rem;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 1.5rem;
+    }
+
+    p {
+      margin-top: 0.8rem;
+      font-weight: 500;
+    }
+
+    /* Opciones */
+    .opciones {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    input[type="radio"] {
+      display: none;
+    }
+
+    label {
+      background: #f7f8fc;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    label:hover {
+      background: #ecebff;
+      border-color: #6b4de8;
+    }
+
+    input[type="radio"]:checked + label {
+      background: linear-gradient(135deg, #8e2de2, #4a00e0);
+      color: white;
+      border-color: #6b4de8;
+    }
+
+    button {
+      background: linear-gradient(135deg, #8e2de2, #4a00e0);
+      color: white;
+      font-size: 1rem;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      display: block;
+      margin: 2rem auto;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(78, 0, 224, 0.3);
+    }
+
+    #resultado {
+      background: #f7f8fc;
+      padding: 1rem;
+      border-radius: 10px;
+      margin-top: 2rem;
+      text-align: center;
+      font-size: 1.1rem;
+      line-height: 1.5;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #666;
+      padding: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      main {
+        margin: 1rem;
+        padding: 1.2rem;
+      }
+      label {
+        flex: 1 1 100%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Test de Bienestar Emocional</h1>
+    <p>Descubre cómo te sientes emocionalmente. Este test es confidencial y no sustituye una evaluación profesional.</p>
+  </header>
+
+  <main>
+    <form id="test-form">
+
+      <!-- 🟣 Ánimo / Motivación -->
+      <section>
+        <h2>Ánimo / Motivación</h2>
+        <p>1. Me cuesta encontrar energía o motivación para mis actividades diarias.</p>
+        <div class="opciones">
+          <input type="radio" id="animo1-3" name="animo1" value="3"><label for="animo1-3">Siempre</label>
+          <input type="radio" id="animo1-2" name="animo1" value="2"><label for="animo1-2">Casi siempre</label>
+          <input type="radio" id="animo1-1" name="animo1" value="1"><label for="animo1-1">A veces</label>
+          <input type="radio" id="animo1-0" name="animo1" value="0"><label for="animo1-0">Nunca</label>
+        </div>
+
+        <p>2. Siento poco interés por las cosas que antes disfrutaba.</p>
+        <div class="opciones">
+          <input type="radio" id="animo2-3" name="animo2" value="3"><label for="animo2-3">Siempre</label>
+          <input type="radio" id="animo2-2" name="animo2" value="2"><label for="animo2-2">Casi siempre</label>
+          <input type="radio" id="animo2-1" name="animo2" value="1"><label for="animo2-1">A veces</label>
+          <input type="radio" id="animo2-0" name="animo2" value="0"><label for="animo2-0">Nunca</label>
+        </div>
+
+        <p>3. Últimamente me siento desanimado(a) o sin esperanza.</p>
+        <div class="opciones">
+          <input type="radio" id="animo3-3" name="animo3" value="3"><label for="animo3-3">Siempre</label>
+          <input type="radio" id="animo3-2" name="animo3" value="2"><label for="animo3-2">Casi siempre</label>
+          <input type="radio" id="animo3-1" name="animo3" value="1"><label for="animo3-1">A veces</label>
+          <input type="radio" id="animo3-0" name="animo3" value="0"><label for="animo3-0">Nunca</label>
+        </div>
+      </section>
+
+      <!-- 🔵 Ansiedad -->
+      <section>
+        <h2>Ansiedad / Nerviosismo</h2>
+        <p>4. Me siento tenso(a) o nervioso(a) con frecuencia.</p>
+        <div class="opciones">
+          <input type="radio" id="ansiedad1-3" name="ansiedad1" value="3"><label for="ansiedad1-3">Siempre</label>
+          <input type="radio" id="ansiedad1-2" name="ansiedad1" value="2"><label for="ansiedad1-2">Casi siempre</label>
+          <input type="radio" id="ansiedad1-1" name="ansiedad1" value="1"><label for="ansiedad1-1">A veces</label>
+          <input type="radio" id="ansiedad1-0" name="ansiedad1" value="0"><label for="ansiedad1-0">Nunca</label>
+        </div>
+
+        <p>5. Me preocupo constantemente por cosas pequeñas.</p>
+        <div class="opciones">
+          <input type="radio" id="ansiedad2-3" name="ansiedad2" value="3"><label for="ansiedad2-3">Siempre</label>
+          <input type="radio" id="ansiedad2-2" name="ansiedad2" value="2"><label for="ansiedad2-2">Casi siempre</label>
+          <input type="radio" id="ansiedad2-1" name="ansiedad2" value="1"><label for="ansiedad2-1">A veces</label>
+          <input type="radio" id="ansiedad2-0" name="ansiedad2" value="0"><label for="ansiedad2-0">Nunca</label>
+        </div>
+
+        <p>6. Tengo dificultad para relajarme o calmar mi mente.</p>
+        <div class="opciones">
+          <input type="radio" id="ansiedad3-3" name="ansiedad3" value="3"><label for="ansiedad3-3">Siempre</label>
+          <input type="radio" id="ansiedad3-2" name="ansiedad3" value="2"><label for="ansiedad3-2">Casi siempre</label>
+          <input type="radio" id="ansiedad3-1" name="ansiedad3" value="1"><label for="ansiedad3-1">A veces</label>
+          <input type="radio" id="ansiedad3-0" name="ansiedad3" value="0"><label for="ansiedad3-0">Nunca</label>
+        </div>
+      </section>
+
+      <!-- 🟢 Estrés -->
+      <section>
+        <h2>Estrés / Cansancio mental</h2>
+        <p>7. Me siento abrumado(a) por mis responsabilidades.</p>
+        <div class="opciones">
+          <input type="radio" id="estres1-3" name="estres1" value="3"><label for="estres1-3">Siempre</label>
+          <input type="radio" id="estres1-2" name="estres1" value="2"><label for="estres1-2">Casi siempre</label>
+          <input type="radio" id="estres1-1" name="estres1" value="1"><label for="estres1-1">A veces</label>
+          <input type="radio" id="estres1-0" name="estres1" value="0"><label for="estres1-0">Nunca</label>
+        </div>
+
+        <p>8. Me resulta difícil desconectarme del trabajo o los estudios.</p>
+        <div class="opciones">
+          <input type="radio" id="estres2-3" name="estres2" value="3"><label for="estres2-3">Siempre</label>
+          <input type="radio" id="estres2-2" name="estres2" value="2"><label for="estres2-2">Casi siempre</label>
+          <input type="radio" id="estres2-1" name="estres2" value="1"><label for="estres2-1">A veces</label>
+          <input type="radio" id="estres2-0" name="estres2" value="0"><label for="estres2-0">Nunca</label>
+        </div>
+
+        <p>9. Siento que mi mente no descansa ni siquiera cuando intento relajarme.</p>
+        <div class="opciones">
+          <input type="radio" id="estres3-3" name="estres3" value="3"><label for="estres3-3">Siempre</label>
+          <input type="radio" id="estres3-2" name="estres3" value="2"><label for="estres3-2">Casi siempre</label>
+          <input type="radio" id="estres3-1" name="estres3" value="1"><label for="estres3-1">A veces</label>
+          <input type="radio" id="estres3-0" name="estres3" value="0"><label for="estres3-0">Nunca</label>
+        </div>
+      </section>
+
+      <!-- 🟡 Autoestima -->
+      <section>
+        <h2>Autoestima / Seguridad personal</h2>
+        <p>10. Dudo de mis capacidades o me comparo negativamente con otros.</p>
+        <div class="opciones">
+          <input type="radio" id="autoestima1-3" name="autoestima1" value="3"><label for="autoestima1-3">Siempre</label>
+          <input type="radio" id="autoestima1-2" name="autoestima1" value="2"><label for="autoestima1-2">Casi siempre</label>
+          <input type="radio" id="autoestima1-1" name="autoestima1" value="1"><label for="autoestima1-1">A veces</label>
+          <input type="radio" id="autoestima1-0" name="autoestima1" value="0"><label for="autoestima1-0">Nunca</label>
+        </div>
+
+        <p>11. Me cuesta reconocer mis logros o cualidades.</p>
+        <div class="opciones">
+          <input type="radio" id="autoestima2-3" name="autoestima2" value="3"><label for="autoestima2-3">Siempre</label>
+          <input type="radio" id="autoestima2-2" name="autoestima2" value="2"><label for="autoestima2-2">Casi siempre</label>
+          <input type="radio" id="autoestima2-1" name="autoestima2" value="1"><label for="autoestima2-1">A veces</label>
+          <input type="radio" id="autoestima2-0" name="autoestima2" value="0"><label for="autoestima2-0">Nunca</label>
+        </div>
+
+        <p>12. Me siento poco satisfecho(a) conmigo mismo(a).</p>
+        <div class="opciones">
+          <input type="radio" id="autoestima3-3" name="autoestima3" value="3"><label for="autoestima3-3">Siempre</label>
+          <input type="radio" id="autoestima3-2" name="autoestima3" value="2"><label for="autoestima3-2">Casi siempre</label>
+          <input type="radio" id="autoestima3-1" name="autoestima3" value="1"><label for="autoestima3-1">A veces</label>
+          <input type="radio" id="autoestima3-0" name="autoestima3" value="0"><label for="autoestima3-0">Nunca</label>
+        </div>
+      </section>
+
+      <!-- 🔴 Relaciones -->
+      <section>
+        <h2>Relaciones / Conexión social</h2>
+        <p>13. Me siento solo(a) o aislado(a) de los demás.</p>
+        <div class="opciones">
+          <input type="radio" id="relaciones1-3" name="relaciones1" value="3"><label for="relaciones1-3">Siempre</label>
+          <input type="radio" id="relaciones1-2" name="relaciones1" value="2"><label for="relaciones1-2">Casi siempre</label>
+          <input type="radio" id="relaciones1-1" name="relaciones1" value="1"><label for="relaciones1-1">A veces</label>
+          <input type="radio" id="relaciones1-0" name="relaciones1" value="0"><label for="relaciones1-0">Nunca</label>
+        </div>
+
+        <p>14. Tengo dificultades para expresar mis emociones o pedir ayuda.</p>
+        <div class="opciones">
+          <input type="radio" id="relaciones2-3" name="relaciones2" value="3"><label for="relaciones2-3">Siempre</label>
+          <input type="radio" id="relaciones2-2" name="relaciones2" value="2"><label for="relaciones2-2">Casi siempre</label>
+          <input type="radio" id="relaciones2-1" name="relaciones2" value="1"><label for="relaciones2-1">A veces</label>
+          <input type="radio" id="relaciones2-0" name="relaciones2" value="0"><label for="relaciones2-0">Nunca</label>
+        </div>
+
+        <p>15. Siento que no tengo a quién acudir cuando me siento mal.</p>
+        <div class="opciones">
+          <input type="radio" id="relaciones3-3" name="relaciones3" value="3"><label for="relaciones3-3">Siempre</label>
+          <input type="radio" id="relaciones3-2" name="relaciones3" value="2"><label for="relaciones3-2">Casi siempre</label>
+          <input type="radio" id="relaciones3-1" name="relaciones3" value="1"><label for="relaciones3-1">A veces</label>
+          <input type="radio" id="relaciones3-0" name="relaciones3" value="0"><label for="relaciones3-0">Nunca</label>
+        </div>
+      </section>
+
+      <button type="button" onclick="evaluarTest()">Ver resultados</button>
+    </form>
+
+    <div id="resultado"></div>
+  </main>
+
+  <footer>
+    ⚠️ Este test tiene fines informativos. Si sientes malestar persistente, busca ayuda profesional.
+  </footer>
+
+  <script src="../js/test.js"></script>
+</body>
+</html>
