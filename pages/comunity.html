@@ -1,28 +1,298 @@
 <!DOCTYPE html>
-<html lang = "es">
-    <head>
-        <meta charset="UTF-8">
-        <title> Bienestar emocional</title>
-        <link rel = "stylesheet" href = "../css/styles.css">
-    </head>
-    <body>
-        <header class="navbar container">
-            <a href = "../index.html"> 
-                <img src="../assets/home.png" alt="Ir a Inicio" width="200">
-            </a>
-            <nav class = "navbar-upper">
-                <a class="navbar-card" href="resources.html">
-                    <img src="/assets/book-open.svg" class="nav-icon" alt="">Recursos
-                </a>
-                <a class="navbar-card" href="excercises.html">
-                    <img src="/assets/heart-pulse.svg" class="nav-icon" alt="">Ejercicios
-                </a>
-                <a class="navbar-selected" href="comunity.html">
-                    <img src="/assets/users.svg" class="nav-icon" alt="">Comunidad</a>
-            </nav> 
-        </header>
-        <main>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Comunidad - Bienestar Emocional</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f4f7ff;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
 
-        </main>
-    </body>
+    main {
+      max-width: 900px;
+      margin: 2rem auto;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      padding: 2rem;
+    }
+
+    h1 {
+      color: #4a00e0;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    input[type="text"], input[type="email"], input[type="password"] {
+      width: 80%;
+      padding: 0.6rem;
+      margin: 0.5rem 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background: linear-gradient(135deg, #8e2de2, #4a00e0);
+      color: white;
+      border: none;
+      padding: 0.7rem 1.5rem;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 0.5rem;
+    }
+
+    button:hover {
+      background: linear-gradient(135deg, #4a00e0, #8e2de2);
+    }
+
+    #register-form {
+      display: none;
+      text-align: center;
+    }
+
+    #login-section, #register-form {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    #community-section {
+      display: none;
+    }
+
+    .rules {
+      background: #f0f0ff;
+      border-left: 4px solid #4a00e0;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+    }
+
+    .rules h2 {
+      margin-top: 0;
+    }
+
+    .post-box {
+      margin-bottom: 1.5rem;
+    }
+
+    textarea {
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      padding: 0.6rem;
+      font-size: 1rem;
+      resize: none;
+    }
+
+    .post {
+      background: #f8f8ff;
+      border-left: 4px solid #8e2de2;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+
+    .post small {
+      display: block;
+      color: #666;
+      font-size: 0.9rem;
+      margin-top: 0.3rem;
+    }
+
+    .logout-btn {
+      display: block;
+      background: #ff4b5c;
+      color: #fff;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      cursor: pointer;
+      margin: 0 auto 1.5rem auto; /* centrado */
+      float: none;
+    }
+
+    .logout-btn:hover {
+      background: #ff3246;
+    }
+  </style>
+</head>
+<body>
+  <header class="navbar container">
+    <a href="../index.html">
+      <img src="../assets/home.png" alt="Ir a Inicio" width="200">
+    </a>
+    <nav class="navbar-upper">
+      <a class="navbar-card" href="resources.html">
+        <img src="../assets/book-open.svg" class="nav-icon" alt="">Recursos
+      </a>
+      <a class="navbar-card" href="excercises.html">
+        <img src="../assets/heart-pulse.svg" class="nav-icon" alt="">Ejercicios
+      </a>
+      <a class="navbar-selected" href="comunity.html">
+        <img src="../assets/users.svg" class="nav-icon" alt="">Comunidad
+      </a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- INICIO DE SESIÓN -->
+    <section id="login-section">
+      <h1>Bienvenido a la Comunidad 💬</h1>
+      <p>Inicia sesión o <a href="#" onclick="mostrarRegistro()">regístrate aquí</a> para participar.</p>
+
+      <input type="text" id="login-username" placeholder="Apodo">
+      <input type="password" id="login-password" placeholder="Contraseña">
+      <br>
+      <button onclick="login()">Iniciar sesión</button>
+    </section>
+
+    <!-- REGISTRO -->
+    <section id="register-form">
+      <h1>Crear cuenta</h1>
+      <p>Completa tus datos para unirte a la comunidad 💜</p>
+
+      <input type="text" id="nombre" placeholder="Nombre completo">
+      <input type="email" id="correo" placeholder="Correo electrónico">
+      <input type="text" id="apodo" placeholder="Apodo (como aparecerás en la comunidad)">
+      <input type="password" id="reg-password" placeholder="Contraseña">
+      <br>
+      <button onclick="registrar()">Registrar</button>
+      <br>
+      <a href="#" onclick="mostrarLogin()">← Volver al inicio de sesión</a>
+    </section>
+
+    <!-- COMUNIDAD -->
+    <section id="community-section">
+      <h1>Comunidad de Bienestar 💜</h1>
+      <button class="logout-btn" onclick="cerrarSesion()">Cerrar sesión</button>
+
+      <div class="rules">
+        <h2>Normas de convivencia digital</h2>
+        <ul>
+          <li>🤝 Respeta las opiniones de los demás.</li>
+          <li>💬 No se permiten comentarios ofensivos o discriminatorios.</li>
+          <li>💡 Comparte recursos o experiencias útiles para otros.</li>
+          <li>❤️ Este espacio es de apoyo, no de diagnóstico.</li>
+        </ul>
+      </div>
+
+      <div class="post-box">
+        <textarea id="postText" rows="3" placeholder="Comparte tu mensaje o experiencia..."></textarea>
+        <button onclick="publicar()">Publicar</button>
+      </div>
+
+      <div id="posts"></div>
+    </section>
+  </main>
+
+  <script>
+    let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+    let publicaciones = JSON.parse(localStorage.getItem("publicaciones")) || [];
+    let usuarioActivo = JSON.parse(localStorage.getItem("usuarioActivo"));
+
+    window.onload = () => {
+      if (usuarioActivo) mostrarComunidad();
+      mostrarPosts();
+    };
+
+    function mostrarRegistro() {
+      document.getElementById('login-section').style.display = 'none';
+      document.getElementById('register-form').style.display = 'block';
+    }
+
+    function mostrarLogin() {
+      document.getElementById('register-form').style.display = 'none';
+      document.getElementById('login-section').style.display = 'block';
+    }
+
+    function registrar() {
+      const nombre = document.getElementById('nombre').value.trim();
+      const correo = document.getElementById('correo').value.trim();
+      const apodo = document.getElementById('apodo').value.trim();
+      const password = document.getElementById('reg-password').value.trim();
+
+      if (!nombre || !correo || !apodo || !password) {
+        alert('Por favor, completa todos los campos.');
+        return;
+      }
+
+      if (usuarios.some(u => u.correo === correo || u.apodo === apodo)) {
+        alert('El correo o el apodo ya están registrados.');
+        return;
+      }
+
+      usuarios.push({ nombre, correo, apodo, password });
+      localStorage.setItem("usuarios", JSON.stringify(usuarios));
+      alert('Registro exitoso. ¡Bienvenido/a, ' + apodo + '!');
+      mostrarLogin();
+    }
+
+    function login() {
+      const apodo = document.getElementById('login-username').value.trim();
+      const password = document.getElementById('login-password').value.trim();
+
+      const user = usuarios.find(u => u.apodo === apodo && u.password === password);
+      if (user) {
+        usuarioActivo = user;
+        localStorage.setItem("usuarioActivo", JSON.stringify(usuarioActivo));
+        mostrarComunidad();
+      } else {
+        alert('Apodo o contraseña incorrectos.');
+      }
+    }
+
+    function mostrarComunidad() {
+      document.getElementById('login-section').style.display = 'none';
+      document.getElementById('register-form').style.display = 'none';
+      document.getElementById('community-section').style.display = 'block';
+      mostrarPosts();
+    }
+
+    function cerrarSesion() {
+      alert('Hasta pronto, ' + usuarioActivo.apodo + ' 👋');
+      localStorage.removeItem("usuarioActivo");
+      usuarioActivo = null;
+      document.getElementById('community-section').style.display = 'none';
+      document.getElementById('login-section').style.display = 'block';
+    }
+
+    function publicar() {
+      const postText = document.getElementById('postText').value.trim();
+      if (postText === '') {
+        alert('Escribe algo antes de publicar.');
+        return;
+      }
+
+      const nuevaPublicacion = {
+        apodo: usuarioActivo.apodo,
+        texto: postText,
+        fecha: new Date().toLocaleString()
+      };
+
+      publicaciones.unshift(nuevaPublicacion);
+      localStorage.setItem("publicaciones", JSON.stringify(publicaciones));
+      document.getElementById('postText').value = '';
+      mostrarPosts();
+    }
+
+    function mostrarPosts() {
+      const contenedor = document.getElementById('posts');
+      contenedor.innerHTML = '';
+      publicaciones.forEach(pub => {
+        const post = document.createElement('div');
+        post.classList.add('post');
+        post.innerHTML = `
+          <strong>${pub.apodo}</strong>: ${pub.texto}
+          <small>${pub.fecha}</small>
+        `;
+        contenedor.appendChild(post);
+      });
+    }
+  </script>
+</body>
 </html>
