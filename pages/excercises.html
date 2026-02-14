@@ -1,110 +1,291 @@
 <!DOCTYPE html>
-<html lang = "es">
-    <head>
-        <meta charset="UTF-8">
-        <title> Bienestar emocional</title>
-        <link rel = "stylesheet" href = "../css/styles.css">
-    </head>
-    <body>
-        <header class="navbar container">
-            <a href = "../index.html"> 
-                <img src="../assets/home.png" alt="Ir a Inicio" width="200">
-            </a>
-            <nav class = "navbar-upper">
-                <a class="navbar-card" href="resources.html">
-                    <img src="/assets/book-open.svg" class="nav-icon" alt="">Recursos
-                </a>
-                <a class="navbar-selected" href="excercises.html">
-                    <img src="/assets/heart-pulse.svg" class="nav-icon" alt="">Ejercicios
-                </a>
-                <a class="navbar-card" href="comunity.html">
-                    <img src="/assets/users.svg" class="nav-icon" alt="">Comunidad</a>
-            </nav>            
-        </header>
-        <main>
-            <section class="page-header">
-                <h1 class="page-title">Ejercicios para tu Bienestar Mental</h1>
-                <p class="page-subtitle">¿Qué necesitas hoy?</p>
-            </section>
-            <div class="tabs">
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Bienestar emocional</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    /* --- PAUSAS ACTIVAS --- */
+    .pausas-activas {
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      padding: 2rem;
+      max-width: 900px;
+      margin: 2rem auto;
+    }
 
-    <!-- Opciones -->
-            <div class="tab-buttons">
-                <button class="tab-btn active" onclick="mostrarSeccion('op1', this)">
-                    <img src="/assets/notebook-pen.svg" alt="Icono de corazón" width = "20px">
-                    Descarga Mental
-                </button>
-                <button class="tab-btn" onclick="mostrarSeccion('op2', this)">
-                    <img src="/assets/wind.svg" alt="Icono de corazón" width = "20px">
-                    Respiración Guiada
-                </button>
-                <button class="tab-btn" onclick="mostrarSeccion('op3', this)">
-                    <img src="/assets/activity.svg" alt="Icono de cerebro" width = "20px">
-                    Opción 3
-                </button>
+    .pausas-header h2 {
+      color: #3d00a5;
+      margin-bottom: 0.5rem;
+    }
+
+    .pausas-header p {
+      color: #555;
+      margin-bottom: 1rem;
+    }
+
+    .progress-container {
+      background: #faf7ff;
+      border-radius: 12px;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .progress-info {
+      display: flex;
+      justify-content: space-between;
+      color: #6a5acd;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .progress-bar {
+      background: #e6e1f7;
+      height: 10px;
+      border-radius: 10px;
+      margin-top: 0.5rem;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 10px;
+      width: 0%;
+      background: linear-gradient(90deg, #8e2de2, #4a00e0);
+      transition: width 0.4s ease;
+      border-radius: 10px;
+    }
+
+    .pausas-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    /* Tarjetas de pausas */
+    .pausa {
+      background: #f9f8ff;
+      border: 1px solid #e8e2ff;
+      border-left: 5px solid #7b2ff7;
+      border-radius: 12px;
+      padding: 1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: 0.3s;
+    }
+
+    .pausa:hover {
+      background: #f3edff;
+      transform: translateY(-2px);
+    }
+
+    .pausa h4 {
+      color: #3d00a5;
+      margin: 0;
+    }
+
+    .pausa p {
+      margin: 0.4rem 0;
+      color: #555;
+      font-size: 0.95rem;
+    }
+
+    .pausa small {
+      color: #888;
+      font-size: 0.8rem;
+    }
+
+    .pausa button {
+      background: linear-gradient(135deg, #8e2de2, #4a00e0);
+      color: white;
+      border: none;
+      padding: 0.5rem 1.2rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .pausa button:hover {
+      background: linear-gradient(135deg, #4a00e0, #8e2de2);
+    }
+
+    .pausa button:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+
+    .badge {
+      background: #c9f7c9;
+      color: #2e7d32;
+      font-size: 0.8rem;
+      border-radius: 8px;
+      padding: 0.2rem 0.6rem;
+      margin-left: 0.5rem;
+    }
+
+    .completed {
+      opacity: 0.7;
+      text-decoration: line-through;
+    }
+
+    /* --- Temporizador --- */
+    .temporizador {
+      text-align: center;
+      margin-top: 2rem;
+    }
+
+    .temporizador-card {
+      background: #f9f8ff;
+      border: 1px solid #e3d7ff;
+      border-left: 5px solid #8e2de2;
+      border-radius: 12px;
+      padding: 2rem;
+      display: inline-block;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .reloj h1 {
+      color: #4a00e0;
+      font-size: 3rem;
+      margin: 0.5rem 0;
+    }
+
+    .reloj p {
+      color: #666;
+    }
+
+    .cancelar-btn {
+      background: #ff4b5c;
+      color: white;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      margin-top: 1rem;
+      cursor: pointer;
+    }
+
+    .cancelar-btn:hover {
+      background: #e23e4d;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="navbar container">
+    <a href="../index.html">
+      <img src="../assets/home.png" alt="Ir a Inicio" width="200">
+    </a>
+    <nav class="navbar-upper">
+      <a class="navbar-card" href="resources.html">
+        <img src="/assets/book-open.svg" class="nav-icon" alt="">Recursos
+      </a>
+      <a class="navbar-selected" href="excercises.html">
+        <img src="/assets/heart-pulse.svg" class="nav-icon" alt="">Ejercicios
+      </a>
+      <a class="navbar-card" href="comunity.html">
+        <img src="/assets/users.svg" class="nav-icon" alt="">Comunidad
+      </a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page-header">
+      <h1 class="page-title">Ejercicios para tu Bienestar Mental</h1>
+      <p class="page-subtitle">¿Qué necesitas hoy?</p>
+    </section>
+
+    <div class="tabs">
+      <div class="tab-buttons">
+        <button class="tab-btn active" onclick="mostrarSeccion('op1', this)">
+          🧠 Descarga Mental
+        </button>
+        <button class="tab-btn" onclick="mostrarSeccion('op2', this)">
+          🌬️ Respiración Guiada
+        </button>
+        <button class="tab-btn" onclick="mostrarSeccion('op3', this)">
+          💪 Pausas Activas
+        </button>
+      </div>
+
+      <div class="tab-content">
+        <!-- Sección 1 -->
+        <div id="op1" class="tab-section active">
+          <div class="tab">
+            <h4>🧘‍♀️ Descarga Mental</h4>
+            <p>Escribe todo lo que tengas en la mente. No lo ordenes, ni lo pienses.</p>
+            <textarea id="textbox" class="textbox" placeholder="Incluso una sola palabra es suficiente."></textarea>
+            <button onclick="saveEntry()">Guardar</button>
+          </div>
+          <h3>Tus Entradas</h3>
+          <div class="entry-size" id="entries"></div>
+        </div>
+
+        <!-- Sección 2 -->
+        <div id="op2" class="tab-section">
+          <div class="breathing-container">
+            <div id="circle">
+              <h1 id="time">4</h1>
+              <p id="phase">Inhala</p>
+            </div>
+            <div class="progress">
+              <div id="bar"></div>
+            </div>
+            <div class="cycles-info">
+              <p>Ciclos completados</p>
+              <h2 id="cycles">0</h2>
+            </div>
+            <div class="controls">
+              <button id="btn-toggle" onclick="togglePlay()">Iniciar</button>
+              <button onclick="reset()">Reiniciar</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sección 3 - Pausas Activas -->
+        <div id="op3" class="tab-section">
+          <section class="pausas-activas">
+            <div class="pausas-header">
+              <h2>Pausas Activas</h2>
+              <p>Realiza estas actividades durante el día para reducir tensión y mejorar tu concentración.</p>
+              <div class="progress-container">
+                <div class="progress-info">
+                  <span>Progreso del día</span>
+                  <span id="contador-text">0 de 6</span>
+                </div>
+                <div class="progress-bar">
+                  <div id="progress-fill" class="progress-fill"></div>
+                </div>
+              </div>
             </div>
 
-    <!-- Contenido -->
-            <div class="tab-content">
-                <div id="op1" class="tab-section active">
-                    <div class = "tab">
-                        <h4>
-                            <img src="/assets/umbrella.svg" alt = "Icono de paraguas" width = "20px">
-                            Descarga Mental
-                        </h4>
-                        <p>
-                            Escribe todo lo que tengas en la mente.
-                            No lo ordenes, ni lo pienses.
+            <div id="pausas-list" class="pausas-list"></div>
 
-                        </p>
-                        <p>
-
-                        </p>
-                        <textarea id="textbox" class = "textbox" placeholder="Incluso una sola palabra es suficiente."></textarea>
-                        <button onclick="saveEntry()">Guardar</button>
-                    </div>
-                    <h3>Tus Entradas</h3>
-                    <div class="entry-size" id="entries"></div>
+            <div id="temporizador-container" class="temporizador" style="display:none;">
+              <div class="temporizador-card">
+                <h3 id="pausa-actual" class="pausa-actual"></h3>
+                <div class="reloj">
+                  <h1 id="tiempo-restante">00:00</h1>
+                  <p>Tiempo restante</p>
                 </div>
-
-                <div id="op2" class="tab-section">
-    
-                    <div class="breathing-container">
-                        
-                        <div id="circle">
-                            <h1 id="time">4</h1>
-                            <p id="phase">Inhala</p>
-                        </div>
-
-                        <div class="progress">
-                            <div id="bar"></div>
-                        </div>
-
-                        <div class="cycles-info">
-                            <p>Ciclos completados</p>
-                            <h2 id="cycles">0</h2>
-                        </div>
-
-                        <div class="controls">
-                            <button id="btn-toggle" onclick="togglePlay()">Iniciar</button>
-                            <button onclick="reset()">Reiniciar</button>
-                        </div>
-
-                    </div>
-
-                <div id="op3" class="tab-section">
-                    Contenido de la opción 3
-                </div>
+                <button class="cancelar-btn" onclick="cancelarTemporizador()">Cancelar</button>
+              </div>
             </div>
-            <section class = "final-section">
-                <p> Este sitio provee información orientativa. No sustituye atención profesional. Si sientes que necesitas apoyo profesional, no dudes en buscar ayuda de un psicólogo o terapeuta. </p>
-                <p> Fuentes:</p>
-                <div class="sources">
-                    <a href="..." class="source-link">OMS</a>
-                    <span>| Secretaría de Salud</span>
-                </div>
-            </section>
-        </main>
-        <script src="../js/exercises.js"></script>
-    </body>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <section class="final-section">
+      <p>Este sitio provee información orientativa. No sustituye atención profesional. Si sientes que necesitas apoyo profesional, busca ayuda de un psicólogo o terapeuta.</p>
+      <p>Fuentes:</p>
+      <div class="sources">
+        <a href="https://www.who.int/es" class="source-link">OMS</a>
+        <span>| Secretaría de Salud</span>
+      </div>
+    </section>
+  </main>
+
+  <script src="../js/exercises.js"></script>
+</body>
 </html>

@@ -179,3 +179,169 @@ function reset() {
     dom.toggleBtn.style.color = "white";
 }
 
+// ===========================
+// 🟣 PAUSAS ACTIVAS
+// ===========================
+
+const pausas = [
+  {
+    id: 1,
+    titulo: "Estiramiento de cuello",
+    descripcion: "Inclina suavemente la cabeza hacia un lado, mantén 10 segundos. Repite al otro lado.",
+    duracion: 60, // segundos
+    tipo: "Estiramiento"
+  },
+  {
+    id: 2,
+    titulo: "Rotación de hombros",
+    descripcion: "Gira los hombros hacia atrás 10 veces, luego hacia adelante 10 veces.",
+    duracion: 60,
+    tipo: "Estiramiento"
+  },
+  {
+    id: 3,
+    titulo: "Desconexión digital",
+    descripcion: "Aléjate de pantallas. Mira por la ventana o cierra los ojos.",
+    duracion: 90,
+    tipo: "Desconexión"
+  },
+  {
+    id: 4,
+    titulo: "Respira profundamente",
+    descripcion: "Inhala por 4 segundos, mantén 7 y exhala por 8. Repite 3 veces.",
+    duracion: 80,
+    tipo: "Respiración"
+  },
+  {
+    id: 5,
+    titulo: "Estiramiento de piernas",
+    descripcion: "Ponte de pie y toca la punta de tus pies por 15 segundos. Repite 3 veces.",
+    duracion: 75,
+    tipo: "Estiramiento"
+  },
+  {
+    id: 6,
+    titulo: "Círculos con muñecas",
+    descripcion: "Haz círculos con ambas muñecas durante 30 segundos.",
+    duracion: 45,
+    tipo: "Movilidad"
+  }
+];
+
+let pausasCompletadas = JSON.parse(localStorage.getItem("pausasCompletadas")) || [];
+let pausaActiva = null;
+let tiempoRestante = 0;
+let intervalo = null;
+
+// Elementos del DOM
+const lista = document.getElementById("pausas-list");
+const contadorText = document.getElementById("contador-text");
+const progressFill = document.getElementById("progress-fill");
+const temporizadorContainer = document.getElementById("temporizador-container");
+const pausaActualTitulo = document.getElementById("pausa-actual");
+const tiempoRestanteEl = document.getElementById("tiempo-restante");
+
+// Renderizar la lista de pausas
+function renderPausas() {
+  lista.innerHTML = "";
+
+  pausas.forEach(pausa => {
+    const completada = pausasCompletadas.includes(pausa.id);
+
+    const div = document.createElement("div");
+    div.className = `pausa ${completada ? "completed" : ""}`;
+    div.innerHTML = `
+      <div>
+        <h4>${pausa.titulo} <span class="badge">${pausa.tipo}</span></h4>
+        <p>${pausa.descripcion}</p>
+        <small>🕒 ${Math.floor(pausa.duracion / 60)} min</small>
+      </div>
+      <button ${completada ? "disabled" : ""} onclick="iniciarPausa(${pausa.id})">
+        ${completada ? "Hecho" : "Iniciar"}
+      </button>
+    `;
+    lista.appendChild(div);
+  });
+
+  actualizarProgreso();
+}
+
+// Iniciar una pausa
+function iniciarPausa(id) {
+  const pausa = pausas.find(p => p.id === id);
+  pausaActiva = pausa;
+  tiempoRestante = pausa.duracion;
+
+  pausaActualTitulo.textContent = pausa.titulo;
+  temporizadorContainer.style.display = "block";
+  lista.style.display = "none";
+
+  actualizarTemporizador();
+
+  intervalo = setInterval(() => {
+    tiempoRestante--;
+    actualizarTemporizador();
+
+    if (tiempoRestante <= 0) {
+      clearInterval(intervalo);
+      marcarCompletada(pausa.id);
+    }
+  }, 1000);
+}
+
+// Mostrar tiempo restante
+function actualizarTemporizador() {
+  const min = Math.floor(tiempoRestante / 60);
+  const seg = tiempoRestante % 60;
+  tiempoRestanteEl.textContent = `${min.toString().padStart(2, "0")}:${seg
+    .toString()
+    .padStart(2, "0")}`;
+}
+
+// Cancelar pausa
+function cancelarTemporizador() {
+  clearInterval(intervalo);
+  temporizadorContainer.style.display = "none";
+  lista.style.display = "flex";
+  pausaActiva = null;
+}
+
+// Marcar pausa como completada
+function marcarCompletada(id) {
+  if (!pausasCompletadas.includes(id)) {
+    pausasCompletadas.push(id);
+    localStorage.setItem("pausasCompletadas", JSON.stringify(pausasCompletadas));
+  }
+
+  temporizadorContainer.style.display = "none";
+  lista.style.display = "flex";
+  renderPausas();
+}
+
+// Actualizar progreso y contador
+function actualizarProgreso() {
+  const total = pausas.length;
+  const completadas = pausasCompletadas.length;
+  const porcentaje = (completadas / total) * 100;
+
+  contadorText.textContent = `${completadas} de ${total}`;
+  progressFill.style.width = `${porcentaje}%`;
+}
+
+// Resetear pausas cada día (opcional)
+function resetDiario() {
+  const hoy = new Date().toLocaleDateString();
+  const ultimoDia = localStorage.getItem("ultimoDiaPausas");
+
+  if (ultimoDia !== hoy) {
+    localStorage.removeItem("pausasCompletadas");
+    localStorage.setItem("ultimoDiaPausas", hoy);
+    pausasCompletadas = [];
+  }
+}
+
+// Inicialización
+window.addEventListener("load", () => {
+  resetDiario();
+  renderPausas();
+});
