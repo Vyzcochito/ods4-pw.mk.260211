@@ -654,9 +654,7 @@ footer {
     font-style: italic;
 }
 
-/* 1. El contenedor principal (La clave para centrar todo) */
 #op2 {
-    /* No le pongas display aquí. Deja que tu JS o CSS de pestañas lo controle */
     width: 100%;
 }
 
@@ -732,7 +730,6 @@ footer {
     margin-bottom: 20px;
 }
 
-/* 5. Botones bonitos */
 button {
     background: white;
     border: 1px solid #ddd;
