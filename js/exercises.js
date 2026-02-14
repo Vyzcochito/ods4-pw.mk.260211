@@ -43,8 +43,6 @@ function renderEntries() {
         `;
         return;
     }
-
-    // Si hay entradas
     entries.forEach(entry => {
         const div = document.createElement("div");
         div.className = "entry";
@@ -52,7 +50,7 @@ function renderEntries() {
         div.innerHTML = `
             <div class="entry-header">
                 <span>${entry.date}</span>
-                <button onclick="deleteEntry(${entry.id})">🗑</button>
+                <button onclick="deleteEntry(${entry.id})"><img src="/assets/trash.svg" alt="Eliminar entrada"></button>
             </div>
             <p>${entry.text}</p>
         `;
