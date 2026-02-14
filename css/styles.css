@@ -746,7 +746,6 @@ button {
 
 button:hover {
     background: #f0f0f0;
-    transform: translateY(-2px);
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
@@ -874,7 +873,6 @@ button:hover {
   text-decoration: line-through;
 }
 
-/* --- Temporizador --- */
 .temporizador {
   text-align: center;
   margin-top: 2rem;
