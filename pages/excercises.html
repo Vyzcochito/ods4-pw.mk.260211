@@ -22,7 +22,89 @@
             </nav>            
         </header>
         <main>
+            <section class="page-header">
+                <h1 class="page-title">Ejercicios para tu Bienestar Mental</h1>
+                <p class="page-subtitle">¿Qué necesitas hoy?</p>
+            </section>
+            <div class="tabs">
 
+    <!-- Opciones -->
+            <div class="tab-buttons">
+                <button class="tab-btn active" onclick="mostrarSeccion('op1', this)">
+                    <img src="/assets/notebook-pen.svg" alt="Icono de corazón" width = "20px">
+                    Descarga Mental
+                </button>
+                <button class="tab-btn" onclick="mostrarSeccion('op2', this)">
+                    <img src="/assets/wind.svg" alt="Icono de corazón" width = "20px">
+                    Respiración Guiada
+                </button>
+                <button class="tab-btn" onclick="mostrarSeccion('op3', this)">
+                    <img src="/assets/activity.svg" alt="Icono de cerebro" width = "20px">
+                    Opción 3
+                </button>
+            </div>
+
+    <!-- Contenido -->
+            <div class="tab-content">
+                <div id="op1" class="tab-section active">
+                    <div class = "tab">
+                        <h4>
+                            <img src="/assets/umbrella.svg" alt = "Icono de paraguas" width = "20px">
+                            Descarga Mental
+                        </h4>
+                        <p>
+                            Escribe todo lo que tengas en la mente.
+                            No lo ordenes, ni lo pienses.
+
+                        </p>
+                        <p>
+
+                        </p>
+                        <textarea id="textbox" class = "textbox" placeholder="Incluso una sola palabra es suficiente."></textarea>
+                        <button onclick="saveEntry()">Guardar</button>
+                    </div>
+                    <h3>Tus Entradas</h3>
+                    <div class="entry-size" id="entries"></div>
+                </div>
+
+                <div id="op2" class="tab-section">
+    
+                    <div class="breathing-container">
+                        
+                        <div id="circle">
+                            <h1 id="time">4</h1>
+                            <p id="phase">Inhala</p>
+                        </div>
+
+                        <div class="progress">
+                            <div id="bar"></div>
+                        </div>
+
+                        <div class="cycles-info">
+                            <p>Ciclos completados</p>
+                            <h2 id="cycles">0</h2>
+                        </div>
+
+                        <div class="controls">
+                            <button id="btn-toggle" onclick="togglePlay()">Iniciar</button>
+                            <button onclick="reset()">Reiniciar</button>
+                        </div>
+
+                    </div>
+
+                <div id="op3" class="tab-section">
+                    Contenido de la opción 3
+                </div>
+            </div>
+            <section class = "final-section">
+                <p> Este sitio provee información orientativa. No sustituye atención profesional. Si sientes que necesitas apoyo profesional, no dudes en buscar ayuda de un psicólogo o terapeuta. </p>
+                <p> Fuentes:</p>
+                <div class="sources">
+                    <a href="..." class="source-link">OMS</a>
+                    <span>| Secretaría de Salud</span>
+                </div>
+            </section>
         </main>
+        <script src="../js/exercises.js"></script>
     </body>
 </html>

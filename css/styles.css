@@ -528,3 +528,228 @@ footer {
 .hidden {
     display: none;
 }
+
+/* Estilos para la ejercicios */
+
+.tab-buttons {
+    background-color: #dadada;
+    max-width: 80vw;
+    width: 90%;
+    height: 12vh;
+    border-radius: 20px;
+    display: inline-flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.tab-btn {
+    flex: 1;
+    max-width: 400px;
+    height: 11vh;
+    padding: 16px;
+    border-radius: 20px;
+    transition: 0.3s;
+    margin-top: 4px;
+    border: none;
+    background: #dadada;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.tab-btn.active {
+    background: #fcfcfc;
+}
+
+.tab-section {
+    display: none;
+}
+
+.tab-section.active {
+    display: block;
+}
+
+.tab{
+    background-color: white;
+    font-size: 16px;
+    color: #555;
+    max-width: 80vw;
+    width: 90%;
+    border-radius: 20px;
+    margin: auto;
+    padding: 30px;
+    text-align: justify;
+    height: 50vh;     
+    box-sizing: border-box;
+    display: flex;          
+    flex-direction: column;
+}
+
+.tab h4 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-weight: 500;
+    color:#333
+}
+
+.tab button {
+    padding: 10px 20px;
+    background-color: #5e5e5e;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.textbox{
+    font-family: inherit;
+    background-color: #ececec;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px; 
+    border: none;
+    resize: none;
+    width: 100%;
+    flex: 1;
+    box-sizing: border-box;
+    text-align: left;
+    vertical-align: top;
+    font-size: 14px;
+}
+
+.entry {
+    background-color: #dbe5ff;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 15px;
+}
+
+.entry-size{
+    width: 90%;
+    max-width: 80vw;
+    margin: auto;
+}
+
+.entry-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #313131;
+    margin-bottom: 10px;
+}
+
+.entry button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: #888;
+    font-style: italic;
+}
+
+/* 1. El contenedor principal (La clave para centrar todo) */
+#op2 {
+    /* No le pongas display aquí. Deja que tu JS o CSS de pestañas lo controle */
+    width: 100%;
+}
+
+.breathing-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 50vh;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+#circle {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    background: #d8c4ea;
+    background: linear-gradient(135deg, #c3d5fc 0%, #9ccbfb 100%); 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1); 
+    transition: transform linear;
+    margin-bottom: 30px; 
+}
+
+#circle h1 {
+    font-size: 4rem;
+    margin: 0;
+    color: #fff;
+    font-family: sans-serif;
+}
+
+#circle p {
+    font-size: 1.2rem;
+    margin: 0;
+    color: #fff;
+    opacity: 0.9;
+    font-family: sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.progress {
+    width: 300px;
+    height: 8px;
+    background: #eee;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+#bar {
+    height: 100%;
+    width: 0%;
+    background: #8ec5fc;
+    transition: width 1s linear;
+}
+
+#op2 p {
+    color: #777;
+    margin-bottom: 5px;
+    font-family: sans-serif;
+}
+
+#cycles {
+    margin-top: 0;
+    font-size: 2rem;
+    color: #555;
+    font-family: sans-serif;
+    margin-bottom: 20px;
+}
+
+/* 5. Botones bonitos */
+button {
+    background: white;
+    border: 1px solid #ddd;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    margin: 0 5px;
+    font-size: 1rem;
+    font-family: sans-serif;
+    transition: background-color 0.3s ease, transform 0.1s;
+    font-weight: bold;
+    min-width: 100px;
+}
+
+button:hover {
+    background: #f0f0f0;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
