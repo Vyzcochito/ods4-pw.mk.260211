@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Test de Bienestar Emocional</title>
-  <link rel="stylesheet" href="../css/style.css">
+  <base href="/ods4-pw.mk.260211/">
+  <link rel="stylesheet" href="app/public/css/styles.css">
 
   <style>
     /* === Estilos del test === */
@@ -298,6 +299,6 @@
     ⚠️ Este test tiene fines informativos. Si sientes malestar persistente, busca ayuda profesional.
   </footer>
 
-  <script src="../js/test.js"></script>
+  <script src="app/public/js/test.js"></script>
 </body>
 </html>

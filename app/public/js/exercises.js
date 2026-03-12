@@ -14,59 +14,55 @@ function saveEntry() {
     const text = document.getElementById("textbox").value.trim();
     if (!text) return;
 
-    const entries = JSON.parse(localStorage.getItem("entries")) || [];
-
-    const entry = {
-        id: Date.now(),
-        text: text,
-        date: new Date().toLocaleString()
-    };
-
-    entries.unshift(entry);
-    localStorage.setItem("entries", JSON.stringify(entries));
-
-    document.getElementById("textbox").value = "";
-    renderEntries();
+    fetch("index.php?page=exercises", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: "contenido=" + encodeURIComponent(text)
+    })
+    .then(() => {
+        document.getElementById("textbox").value = "";
+        loadEntries();
+    });
 }
 
-function renderEntries() {
-    const container = document.getElementById("entries");
-    const entries = JSON.parse(localStorage.getItem("entries")) || [];
+function loadEntries() {
+    fetch("app/api/getEntries.php")
+        .then(res => res.json())
+        .then(entries => renderEntries(entries));
+}
 
+function renderEntries(entries) {
+    const container = document.getElementById("entries");
     container.innerHTML = "";
 
-    if (entries.length === 0) {
-        container.innerHTML = `
-            <div class="empty-state">
-                Aún no hay nada por acá.
-            </div>
-        `;
-        return;
-    }
     entries.forEach(entry => {
         const div = document.createElement("div");
         div.className = "entry";
 
         div.innerHTML = `
             <div class="entry-header">
-                <span>${entry.date}</span>
-                <button onclick="deleteEntry(${entry.id})"><img src="/assets/trash.svg" alt="Eliminar entrada"></button>
+                <span>${entry.fecha}</span>
             </div>
-            <p>${entry.text}</p>
+            <p>${entry.contenido}</p>
         `;
 
         container.appendChild(div);
     });
 }
 
-window.onload = renderEntries;
-
+document.addEventListener("DOMContentLoaded", loadEntries);
+/*
 function deleteEntry(id) {
     let entries = JSON.parse(localStorage.getItem("entries")) || [];
     entries = entries.filter(entry => entry.id !== id);
     localStorage.setItem("entries", JSON.stringify(entries));
     renderEntries();
 }
+    */
+
+/* Respiración consciente */
 
 const phases = [
     { name: "Inhala", time: 4, scale: 1.2 },

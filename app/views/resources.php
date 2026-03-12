@@ -3,25 +3,25 @@
     <head>
         <meta charset="UTF-8">
         <title> Bienestar emocional</title>
-        <link rel = "stylesheet" href = "../css/styles.css">
+        <base href="/ods4-pw.mk.260211/">
+        <link rel="stylesheet" href="app/public/css/styles.css">
     </head>
     <body>
-  <header class="navbar container">
-            <a href="../index.html"> 
-                <img src="../assets/home.png" alt="Ir a Inicio" width="200">
+        <header class="navbar container">
+            <a href = "index.php?page=index">  
+                <img src="app/public/assets/home.png" alt="Ir a Inicio" width="200">
             </a>
-            <nav class = "navbar-upper">
-                <a class="navbar-selected" href="resources.html">
-                    <img src="/assets/book-open.svg" class="nav-icon" alt="">Recursos
+            <nav class="navbar-upper">
+                <a class="navbar-card" href="index.php?page=resources">
+                    <img src="app/public/assets/book-open.svg" class="nav-icon" alt="">Recursos
                 </a>
-                <a class="navbar-card" href="excercises.html">
-                    <img src="/assets/heart-pulse.svg" class="nav-icon" alt="">Ejercicios
+                <a class="navbar-card" href="index.php?page=exercises">
+                    <img src="app/public/assets/heart-pulse.svg" class="nav-icon" alt="">Ejercicios
                 </a>
-                <a class="navbar-card" href="comunity.html">
-                    <img src="/assets/users.svg" class="nav-icon" alt="">Comunidad</a>
-            </nav>     
+                <a class="navbar-card" href="index.php?page=community">
+                    <img src="app/public/assets/users.svg" class="nav-icon" alt="">Comunidad</a>
+            </nav>
         </header>
-
         <main>
             <section class="page-header">
                 <h1 class="page-title">Recursos Educativos</h1>

@@ -3,191 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <title>Bienestar emocional</title>
-  <link rel="stylesheet" href="../css/styles.css">
-  <style>
-    /* --- PAUSAS ACTIVAS --- */
-    .pausas-activas {
-      background: #ffffff;
-      border-radius: 16px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-      padding: 2rem;
-      max-width: 900px;
-      margin: 2rem auto;
-    }
-
-    .pausas-header h2 {
-      color: #3d00a5;
-      margin-bottom: 0.5rem;
-    }
-
-    .pausas-header p {
-      color: #555;
-      margin-bottom: 1rem;
-    }
-
-    .progress-container {
-      background: #faf7ff;
-      border-radius: 12px;
-      padding: 1rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .progress-info {
-      display: flex;
-      justify-content: space-between;
-      color: #6a5acd;
-      font-weight: 600;
-      font-size: 0.9rem;
-    }
-
-    .progress-bar {
-      background: #e6e1f7;
-      height: 10px;
-      border-radius: 10px;
-      margin-top: 0.5rem;
-      overflow: hidden;
-    }
-
-    .progress-fill {
-      height: 10px;
-      width: 0%;
-      background: linear-gradient(90deg, #8e2de2, #4a00e0);
-      transition: width 0.4s ease;
-      border-radius: 10px;
-    }
-
-    .pausas-list {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    /* Tarjetas de pausas */
-    .pausa {
-      background: #f9f8ff;
-      border: 1px solid #e8e2ff;
-      border-left: 5px solid #7b2ff7;
-      border-radius: 12px;
-      padding: 1rem 1.5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      transition: 0.3s;
-    }
-
-    .pausa:hover {
-      background: #f3edff;
-      transform: translateY(-2px);
-    }
-
-    .pausa h4 {
-      color: #3d00a5;
-      margin: 0;
-    }
-
-    .pausa p {
-      margin: 0.4rem 0;
-      color: #555;
-      font-size: 0.95rem;
-    }
-
-    .pausa small {
-      color: #888;
-      font-size: 0.8rem;
-    }
-
-    .pausa button {
-      background: linear-gradient(135deg, #8e2de2, #4a00e0);
-      color: white;
-      border: none;
-      padding: 0.5rem 1.2rem;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    .pausa button:hover {
-      background: linear-gradient(135deg, #4a00e0, #8e2de2);
-    }
-
-    .pausa button:disabled {
-      background: #ccc;
-      cursor: not-allowed;
-    }
-
-    .badge {
-      background: #c9f7c9;
-      color: #2e7d32;
-      font-size: 0.8rem;
-      border-radius: 8px;
-      padding: 0.2rem 0.6rem;
-      margin-left: 0.5rem;
-    }
-
-    .completed {
-      opacity: 0.7;
-      text-decoration: line-through;
-    }
-
-    /* --- Temporizador --- */
-    .temporizador {
-      text-align: center;
-      margin-top: 2rem;
-    }
-
-    .temporizador-card {
-      background: #f9f8ff;
-      border: 1px solid #e3d7ff;
-      border-left: 5px solid #8e2de2;
-      border-radius: 12px;
-      padding: 2rem;
-      display: inline-block;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-
-    .reloj h1 {
-      color: #4a00e0;
-      font-size: 3rem;
-      margin: 0.5rem 0;
-    }
-
-    .reloj p {
-      color: #666;
-    }
-
-    .cancelar-btn {
-      background: #ff4b5c;
-      color: white;
-      border: none;
-      padding: 0.6rem 1.2rem;
-      border-radius: 8px;
-      margin-top: 1rem;
-      cursor: pointer;
-    }
-
-    .cancelar-btn:hover {
-      background: #e23e4d;
-    }
-  </style>
+  <base href="/ods4-pw.mk.260211/">
+  <link rel="stylesheet" href="app/public/css/styles.css">
 </head>
-
 <body>
   <header class="navbar container">
-    <a href="../index.html">
-      <img src="../assets/home.png" alt="Ir a Inicio" width="200">
+    <a href = "index.php?page=index">  
+        <img src="app/public/assets/home.png" alt="Ir a Inicio" width="200">
     </a>
     <nav class="navbar-upper">
-      <a class="navbar-card" href="resources.html">
-        <img src="/assets/book-open.svg" class="nav-icon" alt="">Recursos
+      <a class="navbar-card" href="index.php?page=resources">
+        <img src="app/public/assets/book-open.svg" class="nav-icon" alt="">Recursos
       </a>
-      <a class="navbar-selected" href="excercises.html">
-        <img src="/assets/heart-pulse.svg" class="nav-icon" alt="">Ejercicios
+      <a class="navbar-card" href="index.php?page=exercises">
+        <img src="app/public/assets/heart-pulse.svg" class="nav-icon" alt="">Ejercicios
       </a>
-      <a class="navbar-card" href="comunity.html">
-        <img src="/assets/users.svg" class="nav-icon" alt="">Comunidad
-      </a>
+      <a class="navbar-card" href="index.php?page=community">
+        <img src="app/public/assets/users.svg" class="nav-icon" alt="">Comunidad</a>
     </nav>
-  </header>
+</header>
 
   <main>
     <section class="page-header">
@@ -198,12 +32,15 @@
     <div class="tabs">
       <div class="tab-buttons">
         <button class="tab-btn active" onclick="mostrarSeccion('op1', this)">
+          <img src = "app/public/assets/umbrella.svg" alt="Ejercicio de escritura" width="20" style="margin-right: 8px;">
           Descarga Mental
         </button>
         <button class="tab-btn" onclick="mostrarSeccion('op2', this)">
+          <img src = "app/public/assets/wind.svg" alt="Ejercicio de respiración" width="20" style="margin-right: 8px;">
           Respiración Guiada
         </button>
         <button class="tab-btn" onclick="mostrarSeccion('op3', this)">
+          <img src = "app/public/assets/activity.svg" alt="Ejercicio de pausas activas" width="20" style="margin-right: 8px;">
           Pausas Activas
         </button>
       </div>
@@ -286,6 +123,6 @@
     </section>
   </main>
 
-  <script src="../js/exercises.js"></script>
+  <script src="app/public/js/exercises.js"></script>
 </body>
 </html>
