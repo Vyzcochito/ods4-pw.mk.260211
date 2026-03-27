@@ -1,3 +1,5 @@
+let usuarioActivo = JSON.parse(localStorage.getItem("usuarioActivo"));
+
 function mostrarSeccion(id, btn) {
 
     document.querySelectorAll(".tab-section")
@@ -10,29 +12,43 @@ function mostrarSeccion(id, btn) {
     btn.classList.add("active");
 }
 
+// 🔷 GUARDAR ENTRADA
 function saveEntry() {
     const text = document.getElementById("textbox").value.trim();
     if (!text) return;
 
-    fetch("index.php?page=exercises", {
+    if (!usuarioActivo || !usuarioActivo.id) {
+        alert("Debes iniciar sesión");
+        return;
+    }
+
+    fetch('/ods4-pw.mk.260211/app/controllers/descargasController.php', {
         method: "POST",
         headers: {
             "Content-Type": "application/x-www-form-urlencoded"
         },
-        body: "contenido=" + encodeURIComponent(text)
+        body:
+            "contenido=" + encodeURIComponent(text) +
+            "&usuario_id=" + usuarioActivo.id
     })
-    .then(() => {
+    .then(res => res.text())
+    .then(text => {
+        console.log(text); // 🔥 IMPORTANTE
         document.getElementById("textbox").value = "";
         loadEntries();
     });
 }
 
+// 🔷 CARGAR ENTRADAS
 function loadEntries() {
-    fetch("app/api/getEntries.php")
+    if (!usuarioActivo) return;
+
+    fetch("app/api/getEntries.php?usuario_id=" + usuarioActivo.id)
         .then(res => res.json())
         .then(entries => renderEntries(entries));
 }
 
+// 🔷 RENDER
 function renderEntries(entries) {
     const container = document.getElementById("entries");
     container.innerHTML = "";
@@ -52,6 +68,7 @@ function renderEntries(entries) {
     });
 }
 
+// 🔷 INIT
 document.addEventListener("DOMContentLoaded", loadEntries);
 /*
 function deleteEntry(id) {

@@ -16,7 +16,7 @@
 
     main {
       max-width: 900px;
-      margin: 2rem auto;
+      margin: 10rem auto;
       background: white;
       border-radius: 16px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.1);
@@ -119,6 +119,10 @@
 
     .logout-btn:hover { 
       background: #ff3246;
+    }
+
+    .space {
+      height: 10rem;
     }
   </style>
 </head>

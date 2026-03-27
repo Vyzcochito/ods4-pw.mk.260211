@@ -1,18 +1,25 @@
 <?php
-require_once 'Connection.php';
+require_once 'connection.php';
 
 class DescargaModel {
 
-    public static function guardar($contenido) {
-        $connection = Connection::connect();
+public static function guardar($contenido, $usuario_id) {
+    $connection = Connection::connect();
 
-        $stmt = $connection->prepare("INSERT INTO descargas (contenido) VALUES (?)");
-        $stmt->bind_param("s", $contenido);
-        $stmt->execute();
+    $stmt = $connection->prepare(
+        "INSERT INTO descargas (contenido, fecha, usuario_id)
+         VALUES (?, NOW(), ?)"
+    );
 
-        $stmt->close();
-        $connection->close();
+    $stmt->bind_param("si", $contenido, $usuario_id);
+
+    if (!$stmt->execute()) {
+        die("Error SQL: " . $stmt->error);
     }
+
+    $stmt->close();
+    $connection->close();
+}
 
     public static function obtenerTodas() {
         $connection = Connection::connect();

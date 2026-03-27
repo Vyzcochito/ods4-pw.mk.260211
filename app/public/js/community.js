@@ -1,13 +1,10 @@
-
-let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
-let publicaciones = JSON.parse(localStorage.getItem("publicaciones")) || [];
-let usuarioActivo = JSON.parse(localStorage.getItem("usuarioActivo"));
-
+let usuarioActivo = null;
+// 🔷 Cargar posts al iniciar
 window.onload = () => {
-    if (usuarioActivo) mostrarComunidad();
     mostrarPosts();
 };
 
+// 🔷 UI
 function mostrarRegistro() {
     document.getElementById('login-section').style.display = 'none';
     document.getElementById('register-form').style.display = 'block';
@@ -18,86 +15,136 @@ function mostrarLogin() {
     document.getElementById('login-section').style.display = 'block';
 }
 
-function registrar() {
-    const nombre = document.getElementById('nombre').value.trim();
-    const correo = document.getElementById('correo').value.trim();
-    const apodo = document.getElementById('apodo').value.trim();
-    const password = document.getElementById('reg-password').value.trim();
+// 🔷 REGISTRO
+async function registrar() {
+    const formData = new FormData();
+    formData.append('accion', 'registro');
+    formData.append('nombre', document.getElementById('nombre').value);
+    formData.append('correo', document.getElementById('correo').value);
+    formData.append('apodo', document.getElementById('apodo').value);
+    formData.append('password', document.getElementById('reg-password').value);
 
-    if (!nombre || !correo || !apodo || !password) {
-    alert('Por favor, completa todos los campos.');
-    return;
-    }
+    const response = await fetch('/ods4-pw.mk.260211/app/controllers/usersController.php', {
+        method: 'POST',
+        body: formData
+    });
 
-    if (usuarios.some(u => u.correo === correo || u.apodo === apodo)) {
-    alert('El correo o el apodo ya están registrados.');
-    return;
-    }
+    const data = await response.json();
 
-    usuarios.push({ nombre, correo, apodo, password });
-    localStorage.setItem("usuarios", JSON.stringify(usuarios));
-    alert('Registro exitoso. ¡Bienvenido/a, ' + apodo + '!');
-    mostrarLogin();
-}
-
-function login() {
-    const apodo = document.getElementById('login-username').value.trim();
-    const password = document.getElementById('login-password').value.trim();
-
-    const user = usuarios.find(u => u.apodo === apodo && u.password === password);
-    if (user) {
-    usuarioActivo = user;
-    localStorage.setItem("usuarioActivo", JSON.stringify(usuarioActivo));
-    mostrarComunidad();
+    if (data.success) {
+        alert('Registro exitoso');
+        mostrarLogin();
     } else {
-    alert('Apodo o contraseña incorrectos.');
+        alert(data.message || 'Error al registrar');
     }
 }
 
+// 🔷 LOGIN
+async function login() {
+    const apodo = document.getElementById('login-username').value;
+    const password = document.getElementById('login-password').value;
+
+    const formData = new FormData();
+    formData.append('accion', 'login');
+    formData.append('apodo', apodo);
+    formData.append('password', password);
+
+    const response = await fetch('/ods4-pw.mk.260211/app/controllers/usersController.php', {
+        method: 'POST',
+        body: formData
+    });
+
+    const data = await response.json();
+
+    console.log(data); // 🔍 DEBUG
+
+    if (data.success) {
+        usuarioActivo = data.usuario;
+        localStorage.setItem("usuarioActivo", JSON.stringify(usuarioActivo));
+        mostrarComunidad();
+    } else {
+        alert('Credenciales incorrectas');
+    }
+}
+
+// 🔷 MOSTRAR COMUNIDAD
 function mostrarComunidad() {
     document.getElementById('login-section').style.display = 'none';
     document.getElementById('register-form').style.display = 'none';
     document.getElementById('community-section').style.display = 'block';
+
     mostrarPosts();
 }
 
+// 🔷 LOGOUT
 function cerrarSesion() {
-    alert('Hasta pronto, ' + usuarioActivo.apodo + ' 👋');
-    localStorage.removeItem("usuarioActivo");
+    if (usuarioActivo) {
+        alert('Hasta pronto, ' + usuarioActivo.apodo + ' 👋');
+    }
+
     usuarioActivo = null;
+    localStorage.removeItem("usuarioActivo");
+
     document.getElementById('community-section').style.display = 'none';
     document.getElementById('login-section').style.display = 'block';
 }
 
-function publicar() {
-    const postText = document.getElementById('postText').value.trim();
-    if (postText === '') {
-    alert('Escribe algo antes de publicar.');
-    return;
+// 🔷 PUBLICAR
+async function publicar() {
+    
+    const texto = document.getElementById('postText').value.trim();
+
+    if (!texto) {
+        alert('Escribe algo');
+        return;
     }
 
-    const nuevaPublicacion = {
-    apodo: usuarioActivo.apodo,
-    texto: postText,
-    fecha: new Date().toLocaleString()
-    };
+    if (!usuarioActivo) {
+        alert('Debes iniciar sesión');
+        return;
+    }
 
-    publicaciones.unshift(nuevaPublicacion);
-    localStorage.setItem("publicaciones", JSON.stringify(publicaciones));
-    document.getElementById('postText').value = '';
-    mostrarPosts();
+    const formData = new FormData();
+    formData.append('accion', 'crear');
+    formData.append('texto', texto);
+    formData.append('usuario_id', usuarioActivo.id);
+
+    const response = await fetch('/ods4-pw.mk.260211/app/controllers/publicacionesController.php', {
+        method: 'POST',
+        body: formData
+    });
+
+    const text = await response.text(); 
+
+    if (data.success) {
+        document.getElementById('postText').value = '';
+        mostrarPosts();
+    } else {
+        alert('Error al publicar');
+    }
 }
 
-function mostrarPosts() {
+// 🔷 OBTENER POSTS
+async function mostrarPosts() {
+    const formData = new FormData();
+    formData.append('accion', 'listar');
+
+    const response = await fetch('/ods4-pw.mk.260211/app/controllers/publicacionesController.php', {
+        method: 'POST',
+        body: formData
+    });
+
+    const publicaciones = await response.json(); // ← regresamos a JSON
+
     const contenedor = document.getElementById('posts');
     contenedor.innerHTML = '';
+
     publicaciones.forEach(pub => {
-    const post = document.createElement('div');
-    post.classList.add('post');
-    post.innerHTML = `
-        <strong>${pub.apodo}</strong>: ${pub.texto}
-        <small>${pub.fecha}</small>
-    `;
-    contenedor.appendChild(post);
+        contenedor.innerHTML += `
+            <div class="post">
+                <strong>${pub.apodo}</strong>: ${pub.texto}
+                <small>${pub.fecha}</small>
+            </div>
+        `;
     });
 }
